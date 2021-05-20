@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="TestWFP.DDSConvPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TestWFP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DDSConvPage"
+    d:DesignHeight="750"
+    d:DesignWidth="1300"
+    Background="#212121"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Button
+            x:Name="btnSelectDDS"
+            Width="251"
+            Height="56"
+            Margin="55,420,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSelectDDS_Click"
+            Content="Select *.dds textures directory"
+            FontSize="18" />
+        <Button
+            x:Name="btnFixForcesDDS"
+            Width="174"
+            Height="55"
+            Margin="1068,420,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnFixForcesDDS_Click"
+            Content="Fix Forces *.dds"
+            FontSize="18" />
+        <Button
+            x:Name="btnConvDDS"
+            Width="174"
+            Height="56"
+            Margin="1068,511,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnConvDDS_Click"
+            Content="Convert to *.png"
+            FontSize="18" />
+        <ListBox
+            x:Name="listBox"
+            Width="1187"
+            Height="354"
+            Margin="55,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+    </Grid>
+</Page>

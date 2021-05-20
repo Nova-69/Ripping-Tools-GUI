@@ -1,0 +1,172 @@
+﻿<Page
+    x:Class="TestWFP.ModelFBXPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TestWFP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ModelFBXPage"
+    d:DesignHeight="750"
+    d:DesignWidth="1300"
+    Background="#212121"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Rectangle
+            Height="179"
+            MinWidth="500"
+            MinHeight="150"
+            Margin="43,26,42,0"
+            VerticalAlignment="Top"
+            Fill="#2d2c2c" />
+
+        <Label
+            Margin="61,31,1002,0"
+            VerticalAlignment="Top"
+            Content="Convert your model"
+            FontSize="24" />
+        <Label
+            Margin="106,94,898,0"
+            VerticalAlignment="Top"
+            Content="Model file (*.model)"
+            FontSize="18" />
+        <TextBox
+            x:Name="txtBoxModel"
+            Height="28"
+            MinWidth="450"
+            MinHeight="25"
+            Margin="303,96,337,0"
+            VerticalAlignment="Top"
+            Background="#212121"
+            FontSize="18"
+            Text="None"
+            TextWrapping="Wrap" />
+        <Button
+            x:Name="btnSelectModel"
+            Height="26"
+            Margin="968,96,296,0"
+            VerticalAlignment="Top"
+            Background="#212121"
+            Click="btnSelectModel_Click"
+            Content="..." />
+
+
+        <Label
+            Margin="106,134,898,0"
+            VerticalAlignment="Top"
+            Content="Skeleton file (*.skl.hkx)"
+            FontSize="18" />
+        <TextBox
+            x:Name="txtBoxSkl"
+            Height="28"
+            Margin="303,138,337,0"
+            VerticalAlignment="Top"
+            Background="#212121"
+            FontSize="18"
+            Text="None"
+            TextWrapping="Wrap" />
+        <Button
+            x:Name="btnSelectSkl"
+            Height="28"
+            Margin="968,138,296,0"
+            VerticalAlignment="Top"
+            Background="#212121"
+            Click="btnSelectSkl_Click"
+            Content="..." />
+        <Rectangle
+            Height="266"
+            MinWidth="500"
+            MinHeight="150"
+            Margin="40,234,45,0"
+            VerticalAlignment="Top"
+            Fill="#2d2c2c" />
+
+
+        <Label
+            Margin="58,252,1005,0"
+            VerticalAlignment="Top"
+            Content="Settings"
+            FontSize="24" />
+        <CheckBox
+            x:Name="checkBoxConvAnim"
+            Width="241"
+            Height="32"
+            Margin="510,318,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FF212121"
+            Click="checkBoxConvAnim_Click"
+            Content="Convert animations (*.hkx)?"
+            FontSize="18" />
+        <CheckBox
+            x:Name="checkBoxConvAnimNoModel"
+            Width="307"
+            Height="32"
+            Margin="510,368,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FF212121"
+            Click="checkBoxConvAnimNoModel_Click"
+            Content="Convert animations without model?"
+            FontSize="18" />
+        <Label
+            Margin="303,344,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="ModelFBX Version"
+            FontSize="18" />
+
+        <Button
+            x:Name="btnBat"
+            Width="186"
+            Height="66"
+            Margin="43,532,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FF2D2C2C"
+            Click="btnBat_Click"
+            Content="Convert"
+            FontSize="24" />
+
+        <ComboBox
+            x:Name="comboBoxModelFBXVersion"
+            Width="194"
+            Margin="88,348,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FF212121"
+            BorderBrush="Transparent"
+            FontSize="18"
+            SelectionChanged="comboBoxModelFBXVersion_SelectionChanged">
+            <ComboBoxItem
+                Background="Transparent"
+                BorderBrush="Transparent"
+                FontSize="16">
+                <Label Content="Gens/Unleashed" />
+            </ComboBoxItem>
+            <ComboBoxItem
+                Background="Transparent"
+                BorderBrush="Transparent"
+                FontSize="16"
+                Foreground="White">
+                <Label Content="Lost World" />
+            </ComboBoxItem>
+            <ComboBoxItem
+                Background="Transparent"
+                BorderBrush="Transparent"
+                FontSize="16">
+                <Label Content="Forces" />
+            </ComboBoxItem>
+            <ComboBoxItem
+                Background="Transparent"
+                BorderBrush="Transparent"
+                FontSize="16"
+                Foreground="White">
+                <Label Content="ModelFBX 2012" />
+            </ComboBoxItem>
+        </ComboBox>
+
+
+
+    </Grid>
+</Page>
