@@ -17,8 +17,10 @@ namespace TestWFP
             InitializeComponent();
             btnConvDDS.IsEnabled = false;
             btnFixForcesDDS.IsEnabled = false;
+            btnFixStreaming.IsEnabled = false;
         }
 
+        string StreamingDir;
         string DDSDir;
         private void btnSelectDDS_Click(object sender, RoutedEventArgs e)
         {
@@ -29,6 +31,7 @@ namespace TestWFP
             {
                 btnConvDDS.IsEnabled = true;
                 btnFixForcesDDS.IsEnabled = true;
+                btnFixStreaming.IsEnabled = true;
 
                 string fullPath = ofd.FileName;
                 DDSDir = fullPath.Substring(0, fullPath.LastIndexOf('\\'));
@@ -106,6 +109,27 @@ namespace TestWFP
             btnFixForcesDDS.IsEnabled = false;
 
             MessageBox.Show("Fixed all Forces *.dds textures.");
+        }
+
+        private void btnSelectStreamingPath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ("NTSP File|*.ntsp");
+
+            if (ofd.ShowDialog() == true)
+            {
+                string fullPath = ofd.FileName;
+                StreamingDir = fullPath.Substring(0, fullPath.LastIndexOf('\\'));
+
+                StreamWriter sw = new StreamWriter("Resources/Streaming/needle_texture_streaming_path.txt");
+                sw.WriteLine(StreamingDir);
+                sw.Close();
+            }
+        }
+        private void btnFixStreaming_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/Streaming/NeedleTextureStreamingPackage.exe"), DDSDir);
+            MessageBox.Show("Converting. If it didn't work, select streaming path ('game_name'/image/x64/raw/texture_streaming)");
         }
     }
 }

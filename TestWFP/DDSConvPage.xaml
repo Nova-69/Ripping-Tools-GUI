@@ -14,7 +14,7 @@
     <Grid>
         <Button
             x:Name="btnSelectDDS"
-            Width="251"
+            Width="267"
             Height="56"
             Margin="55,420,0,0"
             HorizontalAlignment="Left"
@@ -24,9 +24,9 @@
             FontSize="18" />
         <Button
             x:Name="btnFixForcesDDS"
-            Width="174"
+            Width="241"
             Height="55"
-            Margin="1068,420,0,0"
+            Margin="1001,420,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnFixForcesDDS_Click"
@@ -34,9 +34,9 @@
             FontSize="18" />
         <Button
             x:Name="btnConvDDS"
-            Width="174"
+            Width="190"
             Height="56"
-            Margin="1068,511,0,0"
+            Margin="1052,596,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnConvDDS_Click"
@@ -49,5 +49,25 @@
             Margin="55,24,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" />
+        <Button
+            x:Name="btnFixStreaming"
+            Width="241"
+            Height="54"
+            Margin="1001,494,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnFixStreaming_Click"
+            Content="Fix Frontiers / Shadow *.dds"
+            FontSize="18" />
+        <Button
+            x:Name="btnSelectStreamingPath"
+            Width="267"
+            Height="56"
+            Margin="55,494,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSelectStreamingPath_Click"
+            Content="Select streaming path directory"
+            FontSize="18" />
     </Grid>
 </Page>

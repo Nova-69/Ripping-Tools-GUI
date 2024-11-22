@@ -142,29 +142,24 @@
                 Background="Transparent"
                 BorderBrush="Transparent"
                 FontSize="16">
-                <Label Content="Gens/Unleashed" />
+                <Label Content="Default" />
             </ComboBoxItem>
             <ComboBoxItem
                 Background="Transparent"
                 BorderBrush="Transparent"
                 FontSize="16"
                 Foreground="White">
-                <Label Content="Lost World" />
-            </ComboBoxItem>
-            <ComboBoxItem
-                Background="Transparent"
-                BorderBrush="Transparent"
-                FontSize="16">
-                <Label Content="Forces" />
-            </ComboBoxItem>
-            <ComboBoxItem
-                Background="Transparent"
-                BorderBrush="Transparent"
-                FontSize="16"
-                Foreground="White">
-                <Label Content="ModelFBX 2012" />
+                <Label Content="2012" />
             </ComboBoxItem>
         </ComboBox>
+        <Button
+            x:Name="btnClearSkl"
+            Height="28"
+            Margin="1014,138,250,0"
+            VerticalAlignment="Top"
+            Background="#212121"
+            Click="btnClearSkl_Click"
+            Content="X" />
 
 
 

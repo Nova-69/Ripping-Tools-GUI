@@ -22,6 +22,7 @@ namespace TestWFP
         OpenFileDialog ofd = new OpenFileDialog();
 
         string ModelName = "None";
+        string ModelDir = "None";
         private void btnSelectModel_Click(object sender, RoutedEventArgs e)
         {
 
@@ -32,6 +33,9 @@ namespace TestWFP
             bool? response = ofd.ShowDialog();
             if(response == true)
             {
+                string fullPath = ofd.FileName;
+                ModelDir = fullPath.Substring(0, fullPath.LastIndexOf('\\'));
+
                 ModelName = ofd.SafeFileName;
                 txtBoxModel.Text = ModelName;
             }
@@ -58,6 +62,13 @@ namespace TestWFP
                 txtBoxSkl.Text = SklName;
             }
 
+        }
+
+        private void btnClearSkl_Click(object sender, RoutedEventArgs e)
+        {
+            SklDir = "None";
+            SklName = "None";
+            txtBoxSkl.Text = SklName;
         }
 
         bool ConvAnim = false;
@@ -103,42 +114,37 @@ namespace TestWFP
             var item = (ComboBoxItem)combo.SelectedItem;
             ModelFBXVersion = item.Content.ToString();
 
-            if (ModelFBXVersion == "System.Windows.Controls.Label: Gens/Unleashed")
+            if (ModelFBXVersion == "System.Windows.Controls.Label: Default")
             {
-                ModelFBXVersion = "modelfbxGU";
+                ModelFBXVersion = "modelfbx";
             }
-            else if (ModelFBXVersion == "System.Windows.Controls.Label: Lost World")
+            else if (ModelFBXVersion == "System.Windows.Controls.Label: 2012")
             {
-                ModelFBXVersion = "modelfbxLW";
-            }
-            else if (ModelFBXVersion == "System.Windows.Controls.Label: Forces")
-            {
-                ModelFBXVersion = "modelfbxFor";
-            }
-            else if (ModelFBXVersion == "System.Windows.Controls.Label: ModelFBX 2012")
-            {
-                ModelFBXVersion = "modelfbx2012";
+                ModelFBXVersion = "modelfbx_2012";
             }
         }
 
         string BatName = "None";
         private void btnBat_Click(object sender, RoutedEventArgs e)
         {
-            if(ModelName == "None")
+            SklDir = ModelDir;
+            if (ModelName == "None")
             {
                 MessageBox.Show("No *.model selected.", "Not all parameters filled.");
             }
-            else if(SklName == "None")
+            /* else if(SklName == "None")
             {
                 MessageBox.Show("No *.skl.hkx selected.", "Not all parameters filled.");
             }
+            */
             else if(ModelFBXVersion == "None")
             {
                 MessageBox.Show("No ModelFBX version selected.", "Not all parameters filled.");
             }
-            else if(ConvAnim == true)
+            
+            else if (ConvAnim == true && SklName != "None")
             {
-                if(ConvAnimNoModel == true)
+                if (ConvAnimNoModel == true)
                 {
 
                     CopyModelFBXVersion();
@@ -188,28 +194,59 @@ namespace TestWFP
                 }
 
             }
+            else if (ConvAnim == true)
+            {
+                MessageBox.Show("No *.skl.hkx selected.", "Not all parameters filled.");
+            }
             else
             {
-                CopyModelFBXVersion();
+                if (SklName == "None")
+                {
+                    CopyModelFBXVersion();
 
-                BatName = "ConvertModel.bat";
+                    BatName = "ConvertModel.bat";
 
-                StreamWriter sw = new StreamWriter($@"{SklDir}/ConvertModel.bat");
-                sw.WriteLine("md Converted");
-                sw.WriteLine($"{ModelFBXVersion} {ModelName} {SklName} Converted/{ModelName}.fbx");
-                sw.Close();
+                    StreamWriter sw = new StreamWriter($@"{SklDir}/ConvertModel.bat");
+                    sw.WriteLine("md Converted");
+                    sw.WriteLine($"{ModelFBXVersion} {ModelName} Converted/{ModelName}.fbx");
+                    sw.Close();
 
-                string targetDir = string.Format($@"{SklDir}");   //this is where the .bat is
-                Process proc = new Process();
-                proc.StartInfo.WorkingDirectory = targetDir;
-                proc.StartInfo.FileName = "ConvertModel.bat";
-                proc.StartInfo.CreateNoWindow = false;
-                proc.Start();
+                    string targetDir = string.Format($@"{SklDir}");   //this is where the .bat is
+                    Process proc = new Process();
+                    proc.StartInfo.WorkingDirectory = targetDir;
+                    proc.StartInfo.FileName = "ConvertModel.bat";
+                    proc.StartInfo.CreateNoWindow = false;
+                    proc.Start();
 
-                proc.WaitForExit();
-                ClearFiles();
+                    proc.WaitForExit();
+                    ClearFiles();
 
-                MessageBox.Show("Finished converting.");
+                    MessageBox.Show("Finished converting.");
+                }
+                else
+                {
+                    CopyModelFBXVersion();
+
+                    BatName = "ConvertModel.bat";
+
+                    StreamWriter sw = new StreamWriter($@"{SklDir}/ConvertModel.bat");
+                    sw.WriteLine("md Converted");
+                    sw.WriteLine($"{ModelFBXVersion} {ModelName} {SklName} Converted/{ModelName}.fbx");
+                    sw.Close();
+
+                    string targetDir = string.Format($@"{SklDir}");   //this is where the .bat is
+                    Process proc = new Process();
+                    proc.StartInfo.WorkingDirectory = targetDir;
+                    proc.StartInfo.FileName = "ConvertModel.bat";
+                    proc.StartInfo.CreateNoWindow = false;
+                    proc.Start();
+
+                    proc.WaitForExit();
+                    ClearFiles();
+
+                    MessageBox.Show("Finished converting.");
+                }
+
             }
         }
 
@@ -225,9 +262,9 @@ namespace TestWFP
 
         private void CopyModelFBXVersion()
         {
-            if (ModelFBXVersion == "modelfbxGU")
+            if (ModelFBXVersion == "modelfbx")
             {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/GensUnleashed");
+                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/Default");
                 var sourceDirInfo = new DirectoryInfo(sourceDirPath);
 
                 var targetDirPath = SklDir;
@@ -235,27 +272,7 @@ namespace TestWFP
 
                 CopyFiles(sourceDirInfo, targetDirInfo);
             }
-            else if(ModelFBXVersion == "modelfbxLW")
-            {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/LostWorld");
-                var sourceDirInfo = new DirectoryInfo(sourceDirPath);
-
-                var targetDirPath = SklDir;
-                var targetDirInfo = new DirectoryInfo(targetDirPath);
-
-                CopyFiles(sourceDirInfo, targetDirInfo);
-            }
-            else if (ModelFBXVersion == "modelfbxFor")
-            {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/Forces");
-                var sourceDirInfo = new DirectoryInfo(sourceDirPath);
-
-                var targetDirPath = SklDir;
-                var targetDirInfo = new DirectoryInfo(targetDirPath);
-
-                CopyFiles(sourceDirInfo, targetDirInfo);
-            }
-            else if (ModelFBXVersion == "modelfbx2012")
+            else if(ModelFBXVersion == "modelfbx_2012")
             {
                 var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/2012");
                 var sourceDirInfo = new DirectoryInfo(sourceDirPath);

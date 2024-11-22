@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Development\TestWPFApp\TestWFPApp\TestWFP\obj\Debug\
+D:\Development\Projects\RippingToolsGuiPublicRepo\Ripping-Tools-GUI\TestWFP\obj\Debug\
 TestWFP
 none
 false
 DEBUG;TRACE
-D:\Development\TestWPFApp\TestWFPApp\TestWFP\App.xaml
-61990189703
+D:\Development\Projects\RippingToolsGuiPublicRepo\Ripping-Tools-GUI\TestWFP\App.xaml
+62056996249
 
-11908736412
-42-627675675
+11-1794081065
+42-184849631
 DDSConvPage.xaml;HKXConvPage.xaml;MainWindow.xaml;ModelFBXPage.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;
 
 False
