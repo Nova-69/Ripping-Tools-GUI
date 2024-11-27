@@ -3,7 +3,9 @@ A GUI WPF app for various Hedgehog Engine ripping tools. Created in hopes of mak
 
 
 # Credits
-ModelFBX tools come from various forks of Libgens - https://github.com/DarioSamo/libgens-sonicglvl
+ModelFBX from LibGens - https://github.com/DarioSamo/libgens-sonicglvl
+
+NeedleTextureStreaming from SkythTools - https://github.com/blueskythlikesclouds/SkythTools
 
 HKX Converter for Unleashed can be found here - https://www.moddb.com/mods/sonic-generations-unleashed-project/features/early-research-and-software-development
 
