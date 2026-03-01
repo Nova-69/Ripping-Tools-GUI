@@ -40,64 +40,30 @@ namespace TestWFP
 
         private void btnConvHKX_Click(object sender, RoutedEventArgs e)
         {
+            var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/HKXConv/TagTools");
+            var sourceDirInfo = new DirectoryInfo(sourceDirPath);
 
-            if(HKXVersion == "None")
-            {
-                MessageBox.Show("No version selected.", "Not all parameters filled.");
-            }
+            var targetDirPath = HKXDir;
+            var targetDirInfo = new DirectoryInfo(targetDirPath);
 
-            else if(HKXVersion == "HKXUnleashed")
-            {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/HKXConv/HKXConvUnl");
-                var sourceDirInfo = new DirectoryInfo(sourceDirPath);
+            CopyFiles(sourceDirInfo, targetDirInfo);
 
-                var targetDirPath = HKXDir;
-                var targetDirInfo = new DirectoryInfo(targetDirPath);
+            string batLoc = string.Format($@"{HKXDir}");   //this is where the .bat is 
+            Process proc = new Process();
+            proc.StartInfo.WorkingDirectory = batLoc;
+            proc.StartInfo.FileName = "BatchConvert.bat";
+            proc.StartInfo.CreateNoWindow = false;
+            proc.Start();
 
-                CopyFiles(sourceDirInfo, targetDirInfo);
+            proc.WaitForExit();
 
-                string batLoc = string.Format($@"{HKXDir}");   //this is where the .bat is 
-                Process proc = new Process();
-                proc.StartInfo.WorkingDirectory = batLoc;
-                proc.StartInfo.FileName = "BatchConvert.bat";
-                proc.StartInfo.CreateNoWindow = false;
-                proc.Start();
+            listBoxHKXView.Items.Clear();
+            System.IO.File.Delete($@"{HKXDir}/BatchConvert.bat");
+            System.IO.File.Delete($@"{HKXDir}/TagTools.exe");
+            System.IO.File.Delete($@"{HKXDir}/TagTools.VIR");
+            System.IO.File.Delete($@"{HKXDir}/TypeDatabase.xml");
 
-                proc.WaitForExit();
-
-                listBoxHKXView.Items.Clear();
-                System.IO.File.Delete($@"{HKXDir}/BatchConvert.bat");
-                System.IO.File.Delete($@"{HKXDir}/HKXConverter.exe");
-
-                MessageBox.Show("Converted *.anm.hkx files.");
-            }
-            else if(HKXVersion == "HKXForces")
-            {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/HKXConv/TagTools");
-                var sourceDirInfo = new DirectoryInfo(sourceDirPath);
-
-                var targetDirPath = HKXDir;
-                var targetDirInfo = new DirectoryInfo(targetDirPath);
-
-                CopyFiles(sourceDirInfo, targetDirInfo);
-
-                string batLoc = string.Format($@"{HKXDir}");   //this is where the .bat is 
-                Process proc = new Process();
-                proc.StartInfo.WorkingDirectory = batLoc;
-                proc.StartInfo.FileName = "BatchConvert.bat";
-                proc.StartInfo.CreateNoWindow = false;
-                proc.Start();
-
-                proc.WaitForExit();
-
-                listBoxHKXView.Items.Clear();
-                System.IO.File.Delete($@"{HKXDir}/BatchConvert.bat");
-                System.IO.File.Delete($@"{HKXDir}/TagTools.exe");
-                System.IO.File.Delete($@"{HKXDir}/TagTools.VIR");
-                System.IO.File.Delete($@"{HKXDir}/TypeDatabase.xml");
-
-                MessageBox.Show("Converted *.anm.hkx files.");
-            }
+            MessageBox.Show("Converted *.anm.hkx files.");
         }
 
         private void CopyFiles(DirectoryInfo source, DirectoryInfo target)
@@ -107,24 +73,6 @@ namespace TestWFP
             foreach (var file in source.GetFiles())
             {
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
-            }
-        }
-
-        string HKXVersion = "None";
-        private void comboBoxHKXVersion_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (comboBoxHKXVersion == null) return;
-            var combo = (ComboBox)sender;
-            var item = (ComboBoxItem)combo.SelectedItem;
-            HKXVersion = item.Content.ToString();
-
-            if (HKXVersion == "System.Windows.Controls.Label: Unleashed")
-            {
-                HKXVersion = "HKXUnleashed";
-            }
-            else if (HKXVersion == "System.Windows.Controls.Label: Forces")
-            {
-                HKXVersion = "HKXForces";
             }
         }
     }

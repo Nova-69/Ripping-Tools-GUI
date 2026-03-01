@@ -12,53 +12,42 @@
     mc:Ignorable="d">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="543*"/>
+        </Grid.ColumnDefinitions>
+        <Label
+            Margin="55,13,1011,0"
+            VerticalAlignment="Top"
+            Content="Convert Forces HKX"
+            FontSize="24" Grid.ColumnSpan="3"/>
         <ListBox
             x:Name="listBoxHKXView"
             Width="1187"
             Height="354"
-            Margin="55,24,0,0"
+            Margin="55,60,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
-        <ComboBox
-            x:Name="comboBoxHKXVersion"
-            Width="152"
-            Height="39"
-            Margin="922,419,0,0"
-            Background="#FF212121"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" SelectionChanged="comboBoxHKXVersion_SelectionChanged">
-            <ComboBoxItem FontSize="16">
-                <Label Content="Unleashed" />
-            </ComboBoxItem>
-            <ComboBoxItem FontSize="16">
-                <Label Content="Forces" />
-            </ComboBoxItem>
-        </ComboBox>
-        <Label
-            Margin="1095,419,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="18"
-            Content="Type of *.anm.hkx" />
+            VerticalAlignment="Top" Grid.ColumnSpan="3" />
         <Button
             x:Name="btnSelectHKX"
             Width="251"
             Height="56"
-            Margin="55,406,0,0"
+            Margin="55,442,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnSelectHKX_Click"
             Content="Select *.anm.hkx directory"
-            FontSize="18" />
+            FontSize="18" Grid.ColumnSpan="3" />
         <Button
             x:Name="btnConvHKX"
             Width="174"
             Height="56"
-            Margin="1068,516,0,0"
+            Margin="854,442,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnConvHKX_Click"
             Content="Convert"
-            FontSize="18" />
+            FontSize="18" Grid.Column="2" />
     </Grid>
 </Page>

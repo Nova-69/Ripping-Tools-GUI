@@ -106,24 +106,6 @@ namespace TestWFP
             }
         }
 
-        string ModelFBXVersion = "None";
-        private void comboBoxModelFBXVersion_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (comboBoxModelFBXVersion == null) return;
-            var combo = (ComboBox)sender;
-            var item = (ComboBoxItem)combo.SelectedItem;
-            ModelFBXVersion = item.Content.ToString();
-
-            if (ModelFBXVersion == "System.Windows.Controls.Label: Default")
-            {
-                ModelFBXVersion = "modelfbx";
-            }
-            else if (ModelFBXVersion == "System.Windows.Controls.Label: 2012")
-            {
-                ModelFBXVersion = "modelfbx_2012";
-            }
-        }
-
         string BatName = "None";
         private void btnBat_Click(object sender, RoutedEventArgs e)
         {
@@ -137,23 +119,19 @@ namespace TestWFP
                 MessageBox.Show("No *.skl.hkx selected.", "Not all parameters filled.");
             }
             */
-            else if(ModelFBXVersion == "None")
-            {
-                MessageBox.Show("No ModelFBX version selected.", "Not all parameters filled.");
-            }
             
             else if (ConvAnim == true && SklName != "None")
             {
                 if (ConvAnimNoModel == true)
                 {
 
-                    CopyModelFBXVersion();
+                    CopyModelFBX();
 
                     BatName = "ConvAnimNoModel.bat";
 
                     StreamWriter sw = new StreamWriter($@"{SklDir}/ConvAnimNoModel.bat");
                     sw.WriteLine("md Converted");
-                    sw.WriteLine($"for %%f in (*.anm.hkx) do {ModelFBXVersion} {SklName} %%f Converted/%%f.fbx");
+                    sw.WriteLine($"for %%f in (*.anm.hkx) do modelfbx_2012 {SklName} %%f Converted/%%f.fbx");
                     sw.Close();
 
                     string targetDir = string.Format($@"{SklDir}");   //this is where the .bat is 
@@ -170,12 +148,17 @@ namespace TestWFP
                 }
                 else
                 {
-                    CopyModelFBXVersion();
+                    CopyModelFBX();
 
                     BatName = "ConvertModelAnim.bat";
 
                     StreamWriter sw = new StreamWriter($@"{SklDir}/ConvertModelAnim.bat");
-                    string battext = $"for %%f in (*.anm.hkx) do {ModelFBXVersion} {ModelName} {SklName} %%f Converted/%%f.fbx";
+                    string battext = $"setlocal enabledelayedexpansion\n" + 
+                                     $"for %%f in (*.anm.hkx) do (\n" + 
+                                     $"    set \"name=%%f\"\n" + 
+                                     $"    set \"name=!name:.anm.hkx=!\"\n" + 
+                                     $"    modelfbx_2012 {ModelName} {SklName} %%f Converted/!name!.fbx\n" + 
+                                     $")";
                     sw.WriteLine("md Converted");
                     sw.WriteLine(battext);
                     sw.Close();
@@ -202,13 +185,13 @@ namespace TestWFP
             {
                 if (SklName == "None")
                 {
-                    CopyModelFBXVersion();
+                    CopyModelFBX();
 
                     BatName = "ConvertModel.bat";
 
                     StreamWriter sw = new StreamWriter($@"{SklDir}/ConvertModel.bat");
                     sw.WriteLine("md Converted");
-                    sw.WriteLine($"{ModelFBXVersion} {ModelName} Converted/{ModelName}.fbx");
+                    sw.WriteLine($"modelfbx_2012 {ModelName} Converted/{ModelName}.fbx");
                     sw.Close();
 
                     string targetDir = string.Format($@"{SklDir}");   //this is where the .bat is
@@ -225,13 +208,13 @@ namespace TestWFP
                 }
                 else
                 {
-                    CopyModelFBXVersion();
+                    CopyModelFBX();
 
                     BatName = "ConvertModel.bat";
 
                     StreamWriter sw = new StreamWriter($@"{SklDir}/ConvertModel.bat");
                     sw.WriteLine("md Converted");
-                    sw.WriteLine($"{ModelFBXVersion} {ModelName} {SklName} Converted/{ModelName}.fbx");
+                    sw.WriteLine($"modelfbx_2012 {ModelName} {SklName} Converted/{ModelName}.fbx");
                     sw.Close();
 
                     string targetDir = string.Format($@"{SklDir}");   //this is where the .bat is
@@ -260,35 +243,22 @@ namespace TestWFP
             }
         }
 
-        private void CopyModelFBXVersion()
+        private void CopyModelFBX()
         {
-            if (ModelFBXVersion == "modelfbx")
-            {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/Default");
-                var sourceDirInfo = new DirectoryInfo(sourceDirPath);
+            var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX");
+            var sourceDirInfo = new DirectoryInfo(sourceDirPath);
 
-                var targetDirPath = SklDir;
-                var targetDirInfo = new DirectoryInfo(targetDirPath);
+            var targetDirPath = SklDir;
+            var targetDirInfo = new DirectoryInfo(targetDirPath);
 
-                CopyFiles(sourceDirInfo, targetDirInfo);
-            }
-            else if(ModelFBXVersion == "modelfbx_2012")
-            {
-                var sourceDirPath = System.IO.Path.Combine(Environment.CurrentDirectory, "Resources/ModelFBX/2012");
-                var sourceDirInfo = new DirectoryInfo(sourceDirPath);
-
-                var targetDirPath = SklDir;
-                var targetDirInfo = new DirectoryInfo(targetDirPath);
-
-                CopyFiles(sourceDirInfo, targetDirInfo);
-            }
+            CopyFiles(sourceDirInfo, targetDirInfo);
         }
 
         private void ClearFiles()
         {
             System.IO.File.Delete($@"{SklDir}/allegro-5.0.10-monolith-mt.dll");
             System.IO.File.Delete($@"{SklDir}/{BatName}");
-            System.IO.File.Delete($@"{SklDir}/{ModelFBXVersion}.exe");
+            System.IO.File.Delete($@"{SklDir}/modelfbx_2012.exe");
         }
 
     }

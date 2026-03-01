@@ -1,1 +1,0 @@
-for %%f in ("*.hkx") do hkxconverter %%f %%f

@@ -74,7 +74,7 @@
             Click="btnSelectSkl_Click"
             Content="..." />
         <Rectangle
-            Height="266"
+            Height="214"
             MinWidth="500"
             MinHeight="150"
             Margin="40,234,45,0"
@@ -91,7 +91,7 @@
             x:Name="checkBoxConvAnim"
             Width="241"
             Height="32"
-            Margin="510,318,0,0"
+            Margin="61,317,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="#FF212121"
@@ -102,56 +102,25 @@
             x:Name="checkBoxConvAnimNoModel"
             Width="307"
             Height="32"
-            Margin="510,368,0,0"
+            Margin="61,367,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="#FF212121"
             Click="checkBoxConvAnimNoModel_Click"
             Content="Convert animations without model?"
             FontSize="18" />
-        <Label
-            Margin="303,344,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="ModelFBX Version"
-            FontSize="18" />
 
         <Button
             x:Name="btnBat"
             Width="186"
             Height="66"
-            Margin="43,532,0,0"
+            Margin="43,484,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="#FF2D2C2C"
             Click="btnBat_Click"
             Content="Convert"
             FontSize="24" />
-
-        <ComboBox
-            x:Name="comboBoxModelFBXVersion"
-            Width="194"
-            Margin="88,348,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="#FF212121"
-            BorderBrush="Transparent"
-            FontSize="18"
-            SelectionChanged="comboBoxModelFBXVersion_SelectionChanged">
-            <ComboBoxItem
-                Background="Transparent"
-                BorderBrush="Transparent"
-                FontSize="16">
-                <Label Content="Default" />
-            </ComboBoxItem>
-            <ComboBoxItem
-                Background="Transparent"
-                BorderBrush="Transparent"
-                FontSize="16"
-                Foreground="White">
-                <Label Content="2012" />
-            </ComboBoxItem>
-        </ComboBox>
         <Button
             x:Name="btnClearSkl"
             Height="28"
