@@ -1,3 +1,6 @@
+# ARCHIVED - See forks for potentially up-to-date alternatives
+
+
 # Ripping-Tools-GUI
 A WPF GUI app for various Hedgehog Engine ripping tools. Created in hopes of making the ripping process quick and simple. Note that this is my first time using C# and WPF so the code is probably ass, lmao.
 
